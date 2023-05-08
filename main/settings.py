@@ -32,8 +32,8 @@ EMAIL_HOST_PASSWORD = env.str("EMAIL_HOST_PASSWORD")
 
 # Vercel settings
 
-WSGI_APPLICATION = 'main.wsgi.app'
-# WSGI_APPLICATION = "main.wsgi.application"
+# WSGI_APPLICATION = 'main.wsgi.app'
+WSGI_APPLICATION = "main.wsgi.application"
 
 INSTALLED_APPS = [
     "django.contrib.admin",
