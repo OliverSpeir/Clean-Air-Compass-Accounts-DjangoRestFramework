@@ -27,6 +27,9 @@ DEBUG=env.bool("DEBUG")
 GOOGLE_CLIENT_ID=env.str("GOOGLE_CLIENT_ID")
 SOCIAL_SECRET=env.str("GOOGLE_CLIENT_SECRET")
 FAST_API_BASE_URL=env.str("FAST_API_BASE_URL")
+EMAIL_HOST_USER = env.str("EMAIL_HOST_USER")
+EMAIL_HOST_PASSWORD = env.str("EMAIL_HOST_PASSWORD")
+
 INSTALLED_APPS = [
     "django.contrib.admin",
     "django.contrib.auth",
@@ -147,5 +150,4 @@ EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
-EMAIL_HOST_USER = '' # Your Gmail business account email
-EMAIL_HOST_PASSWORD = '' # Your Gmail business account password
+
