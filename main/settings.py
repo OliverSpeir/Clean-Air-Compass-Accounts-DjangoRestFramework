@@ -30,6 +30,11 @@ FAST_API_BASE_URL=env.str("FAST_API_BASE_URL")
 EMAIL_HOST_USER = env.str("EMAIL_HOST_USER")
 EMAIL_HOST_PASSWORD = env.str("EMAIL_HOST_PASSWORD")
 
+# Vercel settings
+
+WSGI_APPLICATION = 'main.wsgi.app'
+# WSGI_APPLICATION = "main.wsgi.application"
+
 INSTALLED_APPS = [
     "django.contrib.admin",
     "django.contrib.auth",
@@ -60,7 +65,7 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = "main.urls"
-WSGI_APPLICATION = "main.wsgi.application"
+
 TEMPLATES = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",
