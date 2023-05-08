@@ -86,17 +86,17 @@ TEMPLATES = [
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
 
 DATABASES = {
-    "default": {
-        "ENGINE": "django.db.backends.sqlite3",
-        "NAME": os.path.join(BASE_DIR, 'db.sqlite3'),
-    }
     # "default": {
-    #     "ENGINE": env.str("DATABASE_ENGINE"),
-    #     "NAME": env.str("DATABASE_NAME"),
-    #     "USER": env.str("DATABASE_USER"),
-    #     "PASSWORD": env.str("DATABASE_PASSWORD"),
-    #     "HOST": env.str("DATABASE_HOST"),
+    #     "ENGINE": "django.db.backends.sqlite3",
+    #     "NAME": os.path.join(BASE_DIR, 'db.sqlite3'),
     # }
+    "default": {
+        "ENGINE": env.str("DATABASE_ENGINE"),
+        "NAME": env.str("DATABASE_NAME"),
+        "USER": env.str("DATABASE_USER"),
+        "PASSWORD": env.str("DATABASE_PASSWORD"),
+        "HOST": env.str("DATABASE_HOST"),
+    }
 }
 
 # CORS
