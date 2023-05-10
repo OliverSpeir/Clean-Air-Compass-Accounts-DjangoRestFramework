@@ -1,10 +1,7 @@
 from rest_framework.views import APIView
 from rest_framework.response import Response
-from rest_framework import status
 import requests
 from django.core.mail import send_mail
-from django.core.mail import BadHeaderError
-from smtplib import SMTPException
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.generics import (
     ListCreateAPIView,
@@ -15,6 +12,7 @@ from textwrap import dedent
 from .models import EmailAlert
 from .serializers import EmailAlertSerializer
 from django.conf import settings
+from django.http import JsonResponse
 fast_api_base_url = settings.FAST_API_BASE_URL
 alerts = EmailAlert.objects.all()
 
@@ -45,6 +43,8 @@ def get_aqi_level(pm_25):
 class cron(APIView):
 
     def get(self, request):
+        alert_count = 0
+        sent_count = 0
         for alert in alerts:
             location = alert.location
             aqi = query_fast_api(location)
@@ -57,7 +57,6 @@ class cron(APIView):
                 alert.save()
 
             if aqi_level[0] == alert.air_quality and aqi_level[0] != alert.previous_air_quality:
-                print("sending email")
                 send_mail(
                     'Air Quality Alert',
                     message,
@@ -65,7 +64,10 @@ class cron(APIView):
                     [alert.email_to_alert],
                     fail_silently=False,
                 )
-        return Response(status=200)
+                sent_count += 1
+            alert_count += 1
+        response_data = {"alerts": alert_count, "sent": sent_count}
+        return JsonResponse(response_data)
 
 class EmailAlertList(ListCreateAPIView):
     permission_classes = (IsAuthenticated,)
